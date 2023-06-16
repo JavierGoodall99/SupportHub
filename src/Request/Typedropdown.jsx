@@ -1,13 +1,18 @@
 import React from "react";
 import { Dropdown } from "@nextui-org/react";
 
-export default function TypeDropdown() {
+export default function TypeDropdown({ onSelectionChange }) {
   const [selected, setSelected] = React.useState(new Set(["Type"]));
 
   const selectedValue = React.useMemo(
     () => Array.from(selected).join(", ").replaceAll("_", " "),
     [selected]
   );
+
+  // Call the onSelectionChange prop with the selected value whenever it changes
+  React.useEffect(() => {
+    onSelectionChange(selectedValue);
+  }, [selectedValue, onSelectionChange]);
 
   return (
     <Dropdown>

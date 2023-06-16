@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Home from './Home';
 import RequestPage from './Request/RequestPage';
 import NavBar from './NavBar/NavBar';
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import Login from './Login';
 import Profile from './Profile';
 import LoginModal from './SignUp/LoginModal';
@@ -21,20 +21,40 @@ function App() {
   }, []);
 
   const isAuthenticated = !!accessToken;
+  const location = useLocation();
+  const navigate = useNavigate();
+
+
+
+  // Force the user to log in before accessing the home page
+
+  // useEffect(() => {
+  //   if (location.pathname === '/' && !isAuthenticated) {
+  //     navigate('/Login');
+  //   }
+  // }, [location.pathname, isAuthenticated, navigate]);
+
+
+  
+
+
+  // Hide the NavBar on the Login page
+  const showNavBar = location.pathname !== '/Login';
 
   return (
     <div className="App">
-      <NavBar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/RequestPage" element={isAuthenticated ? <RequestPage /> : <Navigate to="/Login" />} />
-          <Route path="/Login" element={<Login />} />
-          <Route
-            path="/profile"
-            element={isAuthenticated ? <Profile username="" email="" /> : <Navigate to="/Login" />}
-          />
-          <Route path="/LoginModal" element={<LoginModal />} />
-        </Routes>
+      {showNavBar && <NavBar />}
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/RequestPage" element={<RequestPage />} />
+        {/* <Route path="/RequestPage" element={isAuthenticated ? <RequestPage /> : <Navigate to="/Login" />} /> */}
+        <Route path="/Login" element={<Login />} />
+        <Route
+          path="/profile"
+          element={isAuthenticated ? <Profile username="" email="" /> : <Navigate to="/Login" />}
+        />
+        <Route path="/LoginModal" element={<LoginModal />} />
+      </Routes>
     </div>
   );
 }

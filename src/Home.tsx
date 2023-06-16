@@ -11,7 +11,7 @@ function App() {
   return (
     <div className="body">
       {/* <NavBar /> */}
-      <h1 className="header">Support Hub</h1>
+      <h1 className="header">Welcome to the Support Hub!</h1>
       <div className="imageContainer">
         <img
           className="BGImage img-fluid"

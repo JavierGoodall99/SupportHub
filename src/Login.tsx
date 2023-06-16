@@ -31,7 +31,8 @@ const Login: React.FC = () => {
 
   return (
     <body>
-      <h1 className="text-center animate__animated animate__zoomIn mb- FontSize"></h1>
+      <div className='LoginPage'>
+      <h1 className="text-center animate__animated animate__zoomIn mb- FontSize">Sign In</h1>
       <br /><br />
       <div className="container1">
         <div className="row">
@@ -40,7 +41,7 @@ const Login: React.FC = () => {
             <div className="inputText">
               <form onSubmit={handleSubmit}>
                 <div>
-                  <h2 className="text-center">Hello There!</h2>
+                  <h2 className="text-center fs-1">Hello There!</h2>
                   {/* <Input
                     size="lg"
                     placeholder="Large"
@@ -79,6 +80,7 @@ const Login: React.FC = () => {
             </div>
           </div>
         </div>
+      </div>
       </div>
     </body>
   );

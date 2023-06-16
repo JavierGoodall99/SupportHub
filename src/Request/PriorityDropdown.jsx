@@ -2,13 +2,20 @@ import React from "react";
 import { Dropdown } from "@nextui-org/react";
 // import '../App.css'
 
-export default function PriorityDropdown() {
+export default function PriorityDropdown({ onSelectionChange }) {
   const [selected, setSelected] = React.useState(new Set(["Priority"]));
 
   const selectedValue = React.useMemo(
     () => Array.from(selected).join(", ").replaceAll("_", " "),
     [selected]
   );
+
+    // Call the onSelectionChange prop with the selected value whenever it changes
+    React.useEffect(() => {
+      onSelectionChange(selectedValue);
+    }, [selectedValue, onSelectionChange]);
+
+
 
   return (
     <Dropdown>
